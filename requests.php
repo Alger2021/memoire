@@ -113,6 +113,69 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="editRequest" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header text-danger">
+                        <h1 class="modal-title fs-5 text-primary " id="exampleModalLabel1"><i class="fa-solid fa-pen-to-square"></i>Edit Request</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-fingerprint"></i>
+                                <span>Matricule:</span>
+                            </div>
+                            <input type="text" value="31216713" readonly>
+                        </div>
+                        <div class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Full name:</span>
+                            </div>
+                            <input type="text" value="Gouffi Mohamed ryad" readonly>
+                        </div>
+                        <div class="editRow">
+                            <div class="rowname">
+                            <i class="fa-solid fa-at"></i>
+                                <span>Email:</span>
+                            </div>
+                            <input type="text" value="ryadgouffi@gmail.com" readonly>
+                        </div>
+                        <div class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>Phone:</span>
+                            </div>
+                            <input type="text" value="0542854235" readonly>
+                        </div>
+                        <div class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <span>Observation:</span>
+                            </div>
+                            <textarea name="observation" id="" placeholder="Enter your observation here..." ></textarea>
+                        </div>
+                        <div data-bs-theme="dark"  class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Status:</span>
+                            </div>
+                            <select  class="form-select" aria-label="Default select example">
+                                <option class="text-success" value="1">Ready</i></option>
+                                <option class="" value="2" selected>In process</option>
+                                <option class="text-danger" value="3">Refused</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="modalclosebtn1" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="modalupdatebtn"  class="btn">Update</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
     <script src="libs/bootstrapv5/bootstrap.bundle.min.js"></script>

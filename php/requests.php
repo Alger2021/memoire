@@ -59,7 +59,7 @@ foreach($result as $key=>$value){
     };
     echo "<td>
             <div class=\"options\">
-                <i class=\"fa-solid text-primary fa-pen-to-square\"></i>
+                <i data-bs-toggle=\"modal\" data-bs-target=\"#editRequest\" class=\"fa-solid text-primary fa-pen-to-square\"></i>
                 <i data-bs-toggle=\"modal\" data-bs-target=\"#deleteRequest\" class=\"fa-solid fa-trash-can\"></i>
             </div>
         </td>";

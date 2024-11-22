@@ -171,3 +171,64 @@ main .modal .modal-content .modal-footer #modalclosebtn{
     color: var(--logo2);
     font-size: 14px;
 }
+
+/* ----------- Second edit btn Modal CSS */
+main .modal#editRequest .modal-body{
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+}
+main .modal#editRequest .editRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+}
+main .modal#editRequest .editRow .rowname {
+    font-size: 15px;
+}
+main .modal#editRequest .editRow .rowname i {
+    color: var(--logo2);
+    margin-right: 6px;
+    font-size: 18px;
+    width: 20px;
+}
+main .modal#editRequest .editRow input, main .modal#editRequest .editRow textarea{
+    width: 300px;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 200;
+    color: var(--gray);
+    cursor: default;
+}
+main .modal#editRequest .editRow textarea{
+    border: solid 1px var(--logo2);
+    cursor: initial;
+}
+main .modal#editRequest .editRow textarea:focus{
+    outline: none;
+    border-color: var(--logo3);
+}
+main .modal#editRequest .editRow select{
+    width: 300px;
+    background-color: var(--bg-color) !important;
+    color: var(--gray);
+    border: solid 1px var(--logo2);
+}
+main .modal#editRequest .editRow select option[value="2"]{
+    color: var(--logo1) !important;
+}
+
+main .modal#editRequest #modalupdatebtn{
+    background-color: var(--logo3) !important;
+    border: none !important;
+    color: white;
+}
+
+main .modal#editRequest #modalclosebtn1{
+    color: #fffdfd;
+    background-color: transparent;
+    border: solid 1px var(--gray);
+}
