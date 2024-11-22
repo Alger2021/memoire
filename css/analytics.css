@@ -1,0 +1,84 @@
+main{
+    padding: 28px 35px;
+}
+main .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+main .header span{
+    font-size: 18px;
+    user-select: none;
+}
+main .header i{
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--logo2);
+}
+
+main .stats{
+    display: flex;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+main .card {
+    background-color: #0B1739;
+    border-radius: 8px;
+    padding: 18px;
+    margin-right: 20px;
+    width: 250px;
+    margin-bottom: 20px;
+}
+main .card:last-child{
+    margin-right: 0px;
+}
+
+main .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+    position: relative;
+}
+main .card-header .title {
+    margin-right: 20px;
+}
+
+main .card-header .title i {
+    color: var(--logo3);
+    margin-right: 5px;
+}
+main .card-header > i {
+    cursor: pointer;
+    color: white;
+}
+main .card-header .title span {
+    color: #AEB9E1;
+    font-size: 14px;
+}
+main .card > span {
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
+main .card > span span {
+    font-size: 13px;
+    color: var(--gray);
+}
+main .card.pie{
+    width: 350px;
+}
+
+main .chartscontainer {
+    display: flex;
+}
+main .chartscontainer .line {
+    display: flex;
+    flex-grow: 1;
+}
+
+main .chartscontainer .line .charts{
+    flex-grow: 1;
+}

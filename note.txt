@@ -1,0 +1,22 @@
+in php empty array() is equal to false
+
+so when i use fetch
+
+i use
+
+if($query)
+
+{}
+
+and when i use fetchAll i use
+
+if(count($query)){}
+
+------------------------
+
+
+
+
+don't forget to close database connections in index.php
+
+SELECT user_table.matricule,user_table.name,user_table.surname,demandes.typefichier,demandes.urgentdate,demandes.statu,demandes.addon FROM user_table JOIN demandes ON user_table.matricule = demandes.foreign_key;
