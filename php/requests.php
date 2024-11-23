@@ -12,6 +12,9 @@ if($_GET["level"] === 0){
     demandes.id,
     demandes.typefichier,
     demandes.addon,
+    demandes.email,
+    demandes.numerotlfn,
+    demandes.observation,
     demandes.urgentdate,
     demandes.statu
     FROM user_table JOIN demandes
@@ -24,6 +27,9 @@ else{
                             demandes.id,
                             demandes.typefichier,
                             demandes.addon,
+                            demandes.email,
+                            demandes.numerotlfn,
+                            demandes.observation,
                             demandes.urgentdate,
                             demandes.statu
                             FROM user_table JOIN demandes
@@ -54,7 +60,7 @@ foreach($result as $key=>$value){
             }
         }
         else{
-            echo "<td><span>$val</span></td>";
+            echo "<td>$val</td>";
         }
     };
     echo "<td>

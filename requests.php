@@ -82,6 +82,9 @@
                         <th>Surname</th>
                         <th>Type</th>
                         <th>Added</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Observation</th>
                         <th>Urgent Date</th>
                         <th>Status</th>
                         <th></th>
@@ -126,44 +129,51 @@
                                 <i class="fa-solid fa-fingerprint"></i>
                                 <span>Matricule:</span>
                             </div>
-                            <input type="text" value="31216713" readonly>
+                            <input id="editInputMatricule" type="text" readonly>
                         </div>
                         <div class="editRow">
                             <div class="rowname">
                                 <i class="fa-solid fa-user"></i>
                                 <span>Full name:</span>
                             </div>
-                            <input type="text" value="Gouffi Mohamed ryad" readonly>
+                            <input id="editInputName" type="text"  readonly>
+                        </div>
+                        <div class="editRow">
+                            <div class="rowname">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <span>Type:</span>
+                            </div>
+                            <input id="editInputType" type="text"  readonly>
                         </div>
                         <div class="editRow">
                             <div class="rowname">
                             <i class="fa-solid fa-at"></i>
                                 <span>Email:</span>
                             </div>
-                            <input type="text" value="ryadgouffi@gmail.com" readonly>
+                            <input id="editInputEmail" type="text"  readonly>
                         </div>
                         <div class="editRow">
                             <div class="rowname">
                                 <i class="fa-solid fa-phone"></i>
                                 <span>Phone:</span>
                             </div>
-                            <input type="text" value="0542854235" readonly>
+                            <input id="editInputPhone" type="text" readonly>
                         </div>
                         <div class="editRow">
                             <div class="rowname">
-                                <i class="fa-solid fa-file-lines"></i>
+                                <i class="fa-solid fa-bookmark"></i>
                                 <span>Observation:</span>
                             </div>
-                            <textarea name="observation" id="" placeholder="Enter your observation here..." ></textarea>
+                            <textarea name="observation" id="editObservation" placeholder="Enter your observation here..." ></textarea>
                         </div>
                         <div data-bs-theme="dark"  class="editRow">
                             <div class="rowname">
                                 <i class="fa-solid fa-gear"></i>
                                 <span>Status:</span>
                             </div>
-                            <select  class="form-select" aria-label="Default select example">
+                            <select id="editSelectOption" class="form-select" aria-label="Default select example">
                                 <option class="text-success" value="1">Ready</i></option>
-                                <option class="" value="2" selected>In process</option>
+                                <option class="" value="2" >In process</option>
                                 <option class="text-danger" value="3">Refused</option>
                             </select>
                         </div>
