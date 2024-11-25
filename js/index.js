@@ -1,4 +1,4 @@
-
+// ------------------------------ body pages tabs
 const tabs = document.querySelectorAll('.tab');
 
 tabs.forEach(tab=>{
@@ -75,3 +75,19 @@ inputs.forEach(input => {
     })
 
 });
+
+// ------------------------------ toggler ON OFF urgent
+
+let toggler = document.getElementById("toggler");
+let date = document.getElementById("urgentdate");
+let urgent = document.getElementById("urgent");
+toggler.addEventListener("click",()=>{
+    toggler.classList.toggle("active");
+    date.classList.toggle("active");
+    if(toggler.classList.contains("active")){
+        urgent.value = "1";
+    }
+    else{
+        urgent.value = "0";
+    }
+})

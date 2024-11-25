@@ -191,7 +191,7 @@ main .container input[name="submit"]:hover{
 }
 
 main .container span.on{
-    background-color: var(--logo2);
+    background-color: gray;
     width: 60px;
     height: 28px;
     border-radius: 20px;
@@ -199,13 +199,13 @@ main .container span.on{
     cursor: pointer;
 }
 
-main .container span.on:hover{
-    background-color: gray;
+main .container span.on.active{
+    background-color: var(--logo2);
 }
-main .container span.on:hover >  span.yes{
+main .container span.on.active >  span.no{
     display: none;
 }
-main .container span.on:hover >  span.no{
+main .container span.on.active >  span.yes{
     display: inline;
 }
 
@@ -213,13 +213,13 @@ main .container span.yes,main .container span.no{
     font-size: 14px;
     position: absolute;
 }
-main .container span.yes{
+main .container span.no{
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
 }
 
-main .container span.no{
+main .container span.yes{
     display: none;
     right: 6px;
     top: 50%;
@@ -239,7 +239,7 @@ main .container span.off{
     transition-duration: .6s;
 }
 
-main .container span.on:hover >  span.off{
+main .container span.on.active >  span.off{
     transform: translate(-28px, -50%);
 }
 
@@ -393,4 +393,13 @@ main .container .page2 tbody a i{
 }
 main .container .page2 tbody a i:hover{
     color: rgb(128, 0, 0);
+}
+
+
+#urgentdate {
+    display: none;
+}
+#urgentdate.active {
+    display: block;
+    margin-bottom: 24px;
 }

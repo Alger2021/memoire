@@ -86,13 +86,15 @@ if(!isset($_SESSION["matricule"])){
                     <textarea  placeholder="Description Here..." name="descriptions" id="" maxlength="1000"></textarea>
                     
                     <div class="remember">
-                        <span class="on"><span class="yes">ON</span><span class="no">OFF</span><span class="off"></span></span>
-                        <input type="hidden" name="urgent" value="1" id="urgent">
+                        <span id="toggler" class="on">
+                            <span class="yes">ON</span>
+                            <span class="no">OFF</span>
+                            <span class="off"></span>
+                        </span>
+                        <input type="hidden" name="urgent" value="0" id="urgent">
                         <label for="urgent">Demande urgent ?</label>
                     </div>
                     <input type="date" value="2024-01-01" name="urgentdate" id="urgentdate">
-                    <br>
-                    <br>
                     <input type="submit" name="submit" value="Submit">
                     
                 </form>
