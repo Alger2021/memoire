@@ -1,3 +1,6 @@
+<!-- SELECT count(*) FROM `demandes` -->
+<!-- SELECT count(*) FROM `demandes`WHERE demandes.statu!="inprocess"; -->
+<!-- SELECT count(*) FROM `demandes`WHERE demandes.statu="inprocess" AND demandes.urgent=1; -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +14,26 @@
     <link rel="stylesheet" href="css/analytics.css">
 </head>
 <body class="d-flex">
+    <?php
+        require "php/config.php";
+        try{
+            $path = "mysql:hostname=". dbhost .";dbname=". dbname;
+            $conn = new PDO($path,dbuser,dbpass);
+            $sql1 = $conn->query("SELECT count(*) AS total FROM `demandes`;");
+            $sql2 = $conn->query("SELECT count(*) AS total FROM `demandes`WHERE demandes.statu!=\"inprocess\";");
+            $sql3 = $conn->query("SELECT count(*) AS total FROM `demandes`WHERE demandes.statu=\"inprocess\" AND demandes.urgent=1;");
+            $total_requests = $sql1->fetch(PDO::FETCH_ASSOC)["total"];
+            $total_f_requests = $sql2->fetch(PDO::FETCH_ASSOC)["total"];
+            $total_unf_requests = $total_requests - $total_f_requests;
+            $total_unf_urgent_requests = $sql3->fetch(PDO::FETCH_ASSOC)["total"];
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        finally{
+            $conn = null;
+        }
+    ?>
     <div class="side-menu" id="side-menu">
         <div class="header">
             <div class="logo">
@@ -76,7 +99,7 @@
                     </div>
                     <i class="fa-solid fa-ellipsis"></i>
                 </div>
-                <span>247</span>
+                <span><?php echo $total_requests;?></span>
             </div>
             <div class="card finished">
                 <div class="card-header">
@@ -86,7 +109,7 @@
                     </div>
                     <i class="fa-solid fa-ellipsis"></i>
                 </div>
-                <span>212</span>
+                <span><?php echo $total_f_requests;?></span>
             </div>
             <div class="card unfinished">
                 <div class="card-header">
@@ -96,7 +119,7 @@
                     </div>
                     <i class="fa-solid fa-ellipsis"></i>
                 </div>
-                <span>35 <span>20 Urgent</span></span>
+                <span><?php echo "$total_unf_requests <span>$total_unf_urgent_requests Urgent</span>";?></span>
             </div>
         </div>
         <div class="chartscontainer">
