@@ -10,6 +10,8 @@
     <link href="css/login.css" rel="stylesheet" />
 </head>
 <body>
+    <i id="moon" class="fa-solid fa-moon"></i>
+    <i id="sun" class="fa-solid fa-sun active"></i>
     <?php 
     session_start();
     if(isset($_SESSION["matricule"]))
@@ -20,7 +22,7 @@
             <div class="containerform">
                 <form id="1" action="php/process.php" method="post" novalidate="1">
                     <div class="logo">
-                        <a href="#"><img src="picts/logo2.svg" alt="LOGO"></a>
+                        <a href="#"><img src="picts/newlogo.svg" alt="LOGO"></a>
                     </div>
                     <span class="kite">Login to Zed</span>
                     <div class="data">

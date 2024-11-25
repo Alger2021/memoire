@@ -47,7 +47,7 @@
         </div>
         <nav>
             <ul class="nav-header">
-                <a class="active" href="analytics.html">
+                <a class="active" href="analytics.php">
                     <li>
                         <i class="fa-solid fa-chart-pie"></i><span>Analytics</span>
                     </li>
@@ -125,9 +125,11 @@
         <div class="chartscontainer">
             <div class="card pie">
                 <div class="charts">
-                    <button onclick="destroyChart(); fetchCreateChart('myChart',1,'pie')">By Year</button>
-                    <button onclick="destroyChart(); fetchCreateChart('myChart',3,'pie')">By Statu</button>
-                    <button onclick="destroyChart(); fetchCreateChart('myChart',2,'pie')">By Type</button>
+                    <div class="chart-btns">
+                        <button class="active" onclick="destroyChart(this); fetchCreateChart('myChart',1,'pie')">By Year</button>
+                        <button onclick="destroyChart(this); fetchCreateChart('myChart',2,'pie')">By Type</button>
+                        <button onclick="destroyChart(this); fetchCreateChart('myChart',3,'pie')">By Statu</button>
+                    </div>
                     <canvas id="myChart"></canvas>
                 </div>
             </div>

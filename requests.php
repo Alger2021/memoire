@@ -26,7 +26,7 @@
         </div>
         <nav>
             <ul class="nav-header">
-                <a  href="analytics.html">
+                <a  href="analytics.php">
                     <li>
                         <i class="fa-solid fa-chart-pie"></i><span>Analytics</span>
                     </li>

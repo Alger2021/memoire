@@ -12,7 +12,7 @@ fetch("php/dataCharts.php?chart=4")
         data: {
         labels: label,
         datasets: [{
-            label: '# of Votes',
+            label: ' Requests',
             data: counts,
             fill:false,
             borderWidth: 1
@@ -50,11 +50,20 @@ fetch("php/dataCharts.php?chart=4")
 
 
 
-fetchCreateChart("myChart",3,"pie");
+fetchCreateChart("myChart",1,"pie");
 
-function destroyChart(){
+// destroy char and make button active
+let buttons = document.querySelectorAll("main .chartscontainer .pie .charts .chart-btns button");
+function destroyChart(btn){
+    buttons.forEach(button=>{
+        if(button.classList.contains("active")){
+            button.classList.remove("active");
+        }
+    })
+    btn.classList.add("active");
     chart.destroy();
 }
+
 
 function createChart(id,type,label,data){
     const ctx = document.getElementById(id);
@@ -63,13 +72,27 @@ function createChart(id,type,label,data){
         data: {
         labels: label,
         datasets: [{
-            label: '# of Votes',
+            label: ' Requests',
             data: data,
             fill:true,
-            borderWidth: 1
+            borderWidth: 1,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+            ],
             }]
         },
-        options: { // Allow the chart to grow larger
+        options: {
             plugins: {
                 legend: {
                     display: true,
@@ -88,5 +111,4 @@ function fetchCreateChart(id,chart,type){
         let counts = data.counts;
         createChart(id,type,label,counts);
     })
-
 }
