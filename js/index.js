@@ -91,3 +91,31 @@ toggler.addEventListener("click",()=>{
         urgent.value = "0";
     }
 })
+
+// ------------------------------ Delete Button Modal
+let targetrow;
+let request_id;
+let deletebuttons = document.querySelectorAll("main .container .page2 tbody i.fa-trash-can");
+let deletetype = document.getElementById("modal-row-fullname");
+let confirmdeletebtn = document.getElementById("modaldeletebtn");
+deletebuttons.forEach(deletebtn=>{
+    deletebtn.addEventListener("click",()=>{
+        targetrow = deletebtn.closest("tr");
+        request_id = targetrow.dataset.requestId;
+        deletetype.textContent = targetrow.children[0].textContent;
+        
+    })
+})
+
+confirmdeletebtn.addEventListener("click",()=>{
+    fetch("php/requests/delete_request.php?request_id=" + request_id)
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        // here i should add notifications based on the returned error code
+        
+    })
+    targetrow.remove();
+    const modal = bootstrap.Modal.getInstance(document.getElementById("deleteRequest"));
+    modal.hide();
+})

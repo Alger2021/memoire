@@ -1,9 +1,23 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION["email"])){
+        header("location:admin.php");
+    }
+
+    require 'php/models.php';
+    require 'php/demandes.php';
+    require 'php/admins.php';
+    $db = new Database();
+    $dbconn = $db->connect();
+    $demandes = new Demandes($dbconn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="shortcut icon" href="picts/newlogo.svg" type="image/x-icon">
     <link href="css/normalize.css" rel="stylesheet" />
     <link rel="stylesheet" href="libs/bootstrapv5/bootstrap.min.css">
     <link href="css/all.min.css" rel="stylesheet" />
@@ -47,7 +61,7 @@
                             <a href="requests.php?level=5"><li>M2</li></a>
                     </div>
                 </ul>
-                <a href="users.html"><li><i class="fa-solid fa-user"></i><span>Users</span></li></a>
+                <a href="adminsgestion.php"><li><i class="fa-solid fa-user"></i><span>Admins</span></li></a>
             </ul>
 
             <div class="nav-footer">
@@ -55,15 +69,17 @@
                 <div id="admin" class="admin">
                     <img src="picts/user.png" alt="">
                     <div class="coords">
-                        <?php 
-                            require "php/config.php";
+                    <?php 
+                            $dbconn = $db->connect();
+                            $admin = new Admins($dbconn);
+                            $result = $admin->admin_data($_SESSION["email"]); // current admin data
+                            echo "<span>$result[fullname]</span>";
                         ?>
-                        <span>Yahiaten</span>
                         <span>Admin</span>
                     </div>
                 </div>
                 
-                <a class="logout" href="php/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
+                <a class="logout" href="php/logout.php?admin=1"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
             </div>
         </nav>
     </div>
@@ -92,7 +108,42 @@
                 </thead>
                 <tbody>
                     <?php 
-                        require "php/requests.php";
+                        if(!isset($_GET["level"]) || empty($_GET["level"])){
+                            $_GET["level"] = 0;
+                        }
+                        $result = $demandes->all_demandes($_GET["level"]);
+
+                        foreach($result as $key=>$value){
+                            echo "<tr data-request-id='$value[id]'>";
+                            foreach($value as $k=>$val){
+                                if($k==="id"){
+                                    continue;
+                                }
+                                else if($k==="statu"){
+                                    switch ($val) {
+                                        case 'ready':
+                                            echo "<td class='text-success'><i class=' fa-solid fa-circle-check'></i><span>ready</span></td>";
+                                            break;
+                                        case 'refused':
+                                            echo '<td class=\'text-danger\'><i class=" fa-solid fa-circle-xmark"></i></i><span>refused</span></td>';
+                                            break;
+                                        default:
+                                            echo '<td ><i class=" fa-solid fa-arrows-rotate"></i><span>in process</span></td>';
+                                            break;
+                                    }
+                                }
+                                else{
+                                    echo "<td>$val</td>";
+                                }
+                            };
+                            echo "<td>
+                                    <div class=\"options\">
+                                        <i data-bs-toggle=\"modal\" data-bs-target=\"#editRequest\" class=\"fa-solid text-primary fa-pen-to-square\"></i>
+                                        <i data-bs-toggle=\"modal\" data-bs-target=\"#deleteRequest\" class=\"fa-solid fa-trash-can\"></i>
+                                    </div>
+                                </td>";
+                            echo "</tr>";
+                        }
                     ?>
                 </tbody>
             </table>

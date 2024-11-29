@@ -1,4 +1,9 @@
 <?php 
+
+require 'php/models.php';
+require 'php/users.php';
+require 'php/demandes.php';
+
 session_start() ;
 
 if(!isset($_SESSION["matricule"])){
@@ -12,6 +17,8 @@ if(!isset($_SESSION["matricule"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="shortcut icon" href="picts/newlogo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="libs/bootstrapv5/bootstrap.min.css">
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/all.min.css" rel="stylesheet" />
     <link href="css/global.css" rel="stylesheet" />
@@ -20,28 +27,18 @@ if(!isset($_SESSION["matricule"])){
 <body>
     <header>
         <div class="container">
-            <a href="#"><img src="picts/logo2.svg" alt=""></a>
+            <a href="#"><img src="picts/newlogo.svg" alt=""></a>
             <div class="userCard">
                 <i class="fa-solid fa-user-graduate"></i>
                 <div class="userCords">
                     <p>Welcome</p>
                     <?php 
-                        require "php/config.php";
-                        try{
-                            $path = "mysql:hostname=". dbhost .";dbname=". dbname;
-                            $conn = new PDO($path,dbuser,dbpass);
-                            $sql = $conn->prepare("SELECT * FROM user_table WHERE matricule = ? LIMIT 1;");
-                            $sql->bindParam(1,$_SESSION["matricule"],PDO::PARAM_INT);
-                            $sql->execute();
-                            $result = $sql->fetch();
+                            $db = new Database();
+                            $dbconn = $db->connect();
+                            $user = new User($dbconn);
+                            $result = $user->user_data($_SESSION["matricule"]);
                             echo "<span>$result[name] $result[surname]</span>";
-                        }
-                        catch(PDOException $e){
-                            echo $e->getMessage();
-                        }
-                        finally{
-                            $conn = null;
-                        }
+                            $dbconn = null;
                     ?>
                     
                 </div>
@@ -56,7 +53,8 @@ if(!isset($_SESSION["matricule"])){
                 <button class="tab" data-tab="page2" >Show Requests</button>
             </div>
             <div id="page1" class="page page1 active">
-                <form action="php/request.php" method="post">
+                <form action="php/process.php" method="post">
+                    <input type="hidden" name="target" value="demand">
                     <span class="kite">Demande d'un fichier :</span>
                     <div class="data">
                         <input type="hidden" name="typefichier" id="dropdownval">
@@ -110,14 +108,66 @@ if(!isset($_SESSION["matricule"])){
                         <th>Cancel</th>
                     </thead>
                     <tbody>
-                        <?php include "php/demandes.php";?>
+                        <?php 
+                            //reconnecting to db, it is not good to keep connected to db
+                            // that's why i keep closing and opening connections
+                            $dbconn = $db->connect();
+                            $demand = new Demandes($dbconn);
 
-
+                            $result = $demand->demande_data_foreign_key($_SESSION["matricule"]);
+                            foreach ($result as $key => $value) {
+                                echo "<tr data-request-id=\"$value[id]\">
+                                <td>$value[typefichier]</td>
+                                <td>$value[addon]</td>";
+                                if($value['urgent']===1){
+                                    echo "<td>YES</td>";
+                                }
+                                else{
+                                    echo "<td>NO</td>";
+                                }
+                                echo "<td>$value[observation]</td>";
+                                if($value['statu']==="ready"){
+                                    echo "<td><i class=\"fa-solid fa-circle-check\"></i>$value[statu]</td>";
+                                }
+                                elseif($value['statu']==="inprocess"){
+                                    echo "<td><i class=\"fa-solid fa-arrows-rotate\"></i>In process</td>";
+                                }
+                                elseif($value['statu']==="refused")
+                                {
+                                    echo "<td><i class=\"fa-solid fa-circle-xmark\"></i>Refused</td>";
+                                }
+                                else{
+                                    echo "<td>$value[statu]</td>";
+                                }
+                                echo "<td><i data-bs-toggle=\"modal\" data-bs-target=\"#deleteRequest\" class=\"fa-solid fa-trash-can\"></i></td></tr>";
+                            }
+                            $dbconn = null;
+                            ?>
                     </tbody>
                 </table>
+                <!-- Delete Request Modal -->
+                <div class="modal fade" id="deleteRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                        <div class="modal-header text-danger">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-trash"></i>Delete Confirmation</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body ">
+                            Are you sure you want to Cancel the request: 
+                            <p id="modal-row-fullname"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="modalclosebtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="modaldeletebtn"  class="btn btn-danger">Delete</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    <script src="libs/bootstrapv5/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>

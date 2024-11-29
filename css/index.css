@@ -1,6 +1,7 @@
 body{
-    background-color: var(--notion-one);
+    background-color: var(--bg-color);
     font-family: "Roboto","Sans-serif";
+    line-height: initial;
 }
 header .container {
     display: flex;
@@ -56,7 +57,7 @@ header .container .userCard .userCords span{
     font-size: 18px;
     /* font-weight: bold; */
     text-transform: uppercase;
-    color: var(--logo1);
+    color: var(--logo3);
     
 }
 header .container a.logout{
@@ -74,7 +75,7 @@ main{
 }
 main .container .tabs button {
     color: white;
-    background-color: transparent;
+    background-color: var(--bg-secondary);
     border: none;
     /* border-radius: 8px; */
     padding: 12px 24px;
@@ -90,7 +91,9 @@ main .container .tabs button.active {
     background-color: var(--logo2);
 }
 main .container div.page{
-    border: solid var(--logo2) 1px;
+    border: solid 1px #0B1739;
+    background-color: var(--bg-secondary);
+    box-shadow: 0px 0px 8px #010511;
     padding: 12px 28px;
     margin-bottom: 40px;
     color: white;
@@ -99,6 +102,7 @@ main .container div.page{
 }
 main .container div.page.active{
     display: block;
+    
 }
 
 
@@ -116,7 +120,7 @@ main .container .kite{
     font-size: 25px;
     font-weight: bold;
     padding-bottom: 24px;
-    color: var(--logo2);
+    color: var(--white);
     margin-top: 16px;
 }
 
@@ -128,14 +132,14 @@ main .container .data input{
     width: 100%;
     padding: 10px 16px;
     margin-bottom: 28px;
-    border: solid 1px var(--logo1);
+    border: solid 1px var(--logo3);
     position: relative;
     z-index: 1;
     border-radius: 4px;
     font-size: 15px;
     font-weight: 300;
-    background-color: var(--notion-one);
-    color: white;
+    background-color: transparent;
+    color: var(--logo1);
 }
 
 
@@ -147,7 +151,7 @@ main .container .data input:focus{
 main .container .data input::placeholder{
     font-size: 14px;
     font-weight: 400;
-    color: white;
+    color: var(--gray);
 }
 main .container .data .matriculedata {
     position: relative;
@@ -159,7 +163,8 @@ main .container .data .matriculedata label{
     top: 12px;
     z-index: 1;
     visibility: hidden;
-    background-color: var(--notion-one);
+    color: var(--logo3);
+    background-color: var(--bg-secondary);
     padding: 0 8px;
     font-size: 13px;
     transition: .2s;
@@ -179,10 +184,11 @@ main .container input[name="submit"]{
     padding: 8px 16px;
     width: 100%;
     margin-bottom: 28px;
-    background-color: var(--mediafire);
+    background-color: var(--logo3);
     border-radius: 4px;
     color: white;
     font-size: 18px;
+    transition: .3s;
 }
 
 main .container input[name="submit"]:hover{
@@ -191,16 +197,18 @@ main .container input[name="submit"]:hover{
 }
 
 main .container span.on{
-    background-color: gray;
-    width: 60px;
+    background-color: transparent;
+    width: 63px;
     height: 28px;
     border-radius: 20px;
     position: relative;
     cursor: pointer;
+    outline: solid 1px var(--logo3);
 }
 
 main .container span.on.active{
     background-color: var(--logo2);
+    outline: none;
 }
 main .container span.on.active >  span.no{
     display: none;
@@ -221,7 +229,7 @@ main .container span.no{
 
 main .container span.yes{
     display: none;
-    right: 6px;
+    right: 9px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -266,14 +274,14 @@ main .container textarea{
     max-width: 100%;
     line-height: 1.3;
     outline: none;
-    border: solid 1px var(--logo1);
+    border: solid 1px var(--logo3);
     margin-bottom: 25px;
 }
-main .container textarea:hover{
+main .container textarea:focus{
     border: solid 1px var(--logo2);
 }
 main .container textarea::placeholder{
-    color: white;
+    color: var(--gray);
     font-size: 14px;
     text-indent: 0;
     
@@ -289,7 +297,7 @@ main .container textarea::placeholder{
     justify-content: space-between;
     align-items: center;
     padding: 12px;
-    background-color: var(--logo2);
+    background-color: var(--logo3);
     border-radius: 8px;
     cursor: pointer;
     transition: .3s;
@@ -325,6 +333,7 @@ main .container textarea::placeholder{
     display: none;
     opacity: 0;
     transition: .3s;
+    background-color: var(--bg-color);
     box-shadow: 0px 0px 4px 1px black;
 }
 .dropdown ul.open-menu{
@@ -344,10 +353,10 @@ main .container textarea::placeholder{
     margin-bottom: 8px;
 }
 .dropdown ul li.active {
-    background-color: var(--logo2);
+    background-color: var(--logo3);
 }
 .dropdown ul li:hover{
-    background-color: var(--mediafire);
+    background-color: var(--logo2);
 }
 
 /* page 2 */
@@ -357,6 +366,8 @@ main .container .page2{
 main .container .page2 table{
     width: 100%;
     margin-top: 28px;
+    border-collapse: separate;
+    text-align: center;
 }
 
 main .container .page2 thead{
@@ -388,10 +399,11 @@ main .container .page2 tbody i.fa-circle-xmark{
     color: red;
 }
 
-main .container .page2 tbody a i{
+main .container .page2 tbody i.fa-trash-can{
     color: red;
+    cursor: pointer;
 }
-main .container .page2 tbody a i:hover{
+main .container .page2 tbody i.fa-trash-can:hover{
     color: rgb(128, 0, 0);
 }
 
@@ -403,3 +415,35 @@ main .container .page2 tbody a i:hover{
     display: block;
     margin-bottom: 24px;
 }
+
+/* --------------- Modal CSS ------------------- */
+
+main .modal .modal-content{
+    background-color: var(--bg-color);
+}
+main .modal .modal-content .modal-header{
+    border-bottom: solid 1px var(--logo2);
+}
+main .modal .modal-content .modal-header i{
+    margin-right: 12px;
+    font-size: 22px;
+}
+main .modal .modal-content .modal-body{
+    color: var(--white);
+}
+main .modal .modal-content .modal-footer{
+    border-top: solid 1px var(--logo2);
+}
+main .modal .modal-content .modal-footer #modalclosebtn{
+    color: #fffdfd;
+    background-color: transparent;
+    border: solid 1px var(--gray);
+}
+
+#modal-row-fullname{
+    margin-top: 8px;
+    color: var(--logo3);
+}
+
+
+/* --------------- END OF Modal CSS ------------------- */

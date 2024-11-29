@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    if(isset($_SESSION["email"])){
+        header("location:analytics.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,24 +20,20 @@
 <body>
     <i id="moon" class="fa-solid fa-moon"></i>
     <i id="sun" class="fa-solid fa-sun active"></i>
-    <?php 
-    session_start();
-    if(isset($_SESSION["matricule"]))
-        header("location:index.php");
-    ?>
+
     <main>
         <div class="container">
             <div class="containerform">
                 <form id="1" action="php/process.php" method="post" >
-                    <input type="hidden" name="target" value="login">
+                    <input type="hidden" name="target" value="loginAsAdmin">
                     <div class="logo">
                         <a href="#"><img src="picts/newlogo.svg" alt="LOGO"></a>
                     </div>
                     <span class="kite">Login to Zed</span>
                     <div class="data">
                         <div class="matriculedata">
-                            <input type="text" name ="matricule" id="matricule" placeholder="Matricule" required>
-                            <label for="matricule">Matricule:</label>
+                            <input type="email" name ="email" id="email" placeholder="Email" required>
+                            <label for="email">Email:</label>
                         </div>
                         <div class="matriculedata">
                             <input id="password" type="password" name="password" placeholder="Password" required>

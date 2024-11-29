@@ -1,16 +1,8 @@
 <?php 
 session_start();
 header("Content-Type: application/json");
-// i have to Uncomment this section after i complete the admin authentificantion process.
-if(!isset($_SESSION['matricule'])){
-    $response = array(
-        "code"=>403,
-        "message"=>"You don't have rights to delete requests"
-    );
-    echo json_encode($response);
-    die();
-}
-else if(!isset($_GET['request_id'])){
+
+if(!isset($_GET['request_id'])){
     $response = array(
         "code"=>400,
         "message"=>"Request Id isn't provided."
@@ -21,8 +13,15 @@ else if(!isset($_GET['request_id'])){
 include "../config.php";
 $path = "mysql:host=" . dbhost . ";dbname=" . dbname;
 $conn = new PDO($path, dbuser, dbpass);
-$sql = $conn->prepare("DELETE FROM demandes WHERE id= ?");
+if(isset($_SESSION['email'])){
+    $sql = $conn->prepare("DELETE FROM demandes WHERE id= ?");
+}
+else{
+    $sql = $conn->prepare("DELETE FROM demandes WHERE id= ? and  foreign_key = ?");
+    $sql->bindParam(2,$_SESSION["matricule"],PDO::PARAM_INT);
+}
 $sql->bindParam(1,$_GET['request_id'],PDO::PARAM_INT);
+
 $sql->execute();
 $rowCount = $sql->rowCount();
 if(!$rowCount){
@@ -34,7 +33,7 @@ if(!$rowCount){
 else{
     $response = array(
         "code"=>200,
-        "message"=>"User deleted successfully",
+        "message"=>"Request deleted successfully",
         "rowsAffected"=>$rowCount
     );
 }

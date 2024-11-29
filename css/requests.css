@@ -1,6 +1,3 @@
-body{
-    line-height: initial;
-}
 input:focus{
     outline: none;
 }
@@ -119,7 +116,7 @@ main tbody .fa-circle-xmark{
     cursor: initial;
 }
 main tbody tr td.highlight{
-    color: #28A745 !important;
+    color: #c6cc16 !important;
 }
 main tbody tr td i.fa-pen-to-square:hover{
     color: var(--logo2)!important;

@@ -74,13 +74,16 @@
     --logo3:#CB3CFF;
     --bg-secondary:#0A1330;
     --white:white;
+    --border:#343B4F;
 }
 
 
 html {
     scroll-behavior: smooth;
 }
-
+body{
+    line-height: initial;
+}
 .container {
     margin-left: auto;
     margin-right: auto;
@@ -98,21 +101,21 @@ a:visited{
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
     .container {
-        width: 750px;
+        max-width: 750px;
     }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .container {
-        width: 970px;
+        max-width: 970px;
     }
 }
 
 /* kinda very large */
 @media (min-width: 1200px) {
     .container {
-        width: 1170px;
+        max-width: 1170px;
     }
 }
 
@@ -124,3 +127,4 @@ a {
     text-decoration: none;
     color: inherit;
 }
+

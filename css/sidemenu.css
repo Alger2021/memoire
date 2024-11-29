@@ -21,7 +21,9 @@ body{
     box-shadow: 0px 8px 28px #010511;
     border-right: solid 1px #0B1739;
 }
-
+.side-menu img,.side-menu svg{
+    vertical-align: baseline !important;
+}
 .side-menu.close{
     max-width: 50px;
     padding: 20px 5px;
