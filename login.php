@@ -44,7 +44,7 @@
                         <label for="rememberme">Remember me</label>
                     </div>
                     <input type="submit" name="submit" value="Login">
-                    <div class="forgot" ><a  href="#">Forgot password?</a></div>
+                    <div class="forgot" ><a  href="signup.php">Don't have an account? <span>Signup<span></a></div>
                     
                 </form>
             </div>

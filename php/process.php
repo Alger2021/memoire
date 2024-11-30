@@ -55,7 +55,7 @@ try {
                     echo "Type of Dropdown is empty";
                     die();
                 }
-                if(!ctype_digit($_POST["numerotlfn"])){
+                if(!empty($_POST["numerotlfn"]) && !ctype_digit($_POST["numerotlfn"])){
                     die("Try a valid phone number!");
                 }
                 $date = date('Y-m-d');
@@ -132,6 +132,40 @@ try {
                 }
             } else {
                 die("Submit Button was not pressed");
+            }
+            break;
+        case 'sign-up':
+            $matricule = $_POST["matricule"];
+            $styear = (int)$_POST["styear"];
+            $name = trim($_POST["susername"]);
+            $surname = trim($_POST["surname"]);
+            $password = $_POST["password"];
+            $confirmpassword = $_POST["confirm-password"];
+            
+            if(isset($_POST["submit"]) && isset($matricule) && isset($styear) && isset($name) && isset($surname) && isset($password) && isset($confirmpassword)){
+                if (empty($matricule) || empty($name) || empty($surname) || empty($password) || empty($confirmpassword)) {
+                    die("All fields are required.");
+                }
+                if (!ctype_digit($matricule)) {
+                    die("Invalid matricule format.");
+                }
+                if ($password !== $confirmpassword) {
+                    die("Passwords do not match.");
+                }
+                if($styear>5 || $styear < 1){
+                    die("Invalid study year.");
+                }
+                // check if matricule exists
+                $result = $user->user_data($matricule);
+                if($result){
+                    die("Matricule already Exists!");
+                }
+                $result2 = $user->add_user($matricule,$password,$name,$surname,$styear);
+                if($result2 == 0){
+                    echo $result2;
+                    die("something went wrong and the User wasn't added!");
+                }
+                header("location:../login.php");
             }
             break;
         default:

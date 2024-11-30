@@ -199,6 +199,13 @@ a:focus {
 .containerform .forgot a{
     transition: .2s;
 }
+.containerform .forgot a span{
+    color: var(--logo1);
+    font-size: 13px;
+    margin-left: 4px;
+
+}
+
 .containerform .forgot a:hover{
     color: var(--logo1);
 }
@@ -224,4 +231,93 @@ a:focus {
 
 body.light .contacts a:hover{
     color: var(--logo1);
+}
+
+.elon-musk{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.elon-musk .elon-musk-IQ{
+    margin-left: 10px;
+}
+
+.containerform form.sign-up  .data input {
+    margin-bottom: 18px;
+}
+
+
+/*form.sign-up  Dropdown Menu signup page*/
+form.sign-up .dropdown{
+    position: relative;
+    margin-bottom: 18px;
+    font-size: 15px !important;
+    color: var(--white);
+}
+
+form.sign-up .dropdown .select{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid var(--logo3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+form.sign-up .dropdown .select.open{
+    box-shadow: 0px 0px 4px 0px var(--logo2);
+}
+
+form.sign-up .dropdown .select .arrow {
+    width: 0;
+    height: 0;
+    border-left: solid 5px transparent;
+    border-top: solid 6px var(--white);
+    border-right: solid 5px transparent;
+    transition: .3s;
+}
+form.sign-up .dropdown .select .arrow.rotate{
+    transform: rotate(180deg);
+}
+
+form.sign-up .dropdown ul{
+    border-radius: 4px;
+    padding: 12px 8px;
+    position: absolute;
+    width: 100%;
+    z-index: 11;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    opacity: 0;
+    transition: .3s;
+    background-color: var(--bg-color);
+    /* border: 1px solid var(--border); */
+    box-shadow: 0px 0px 4px 1px black;
+}
+form.sign-up .dropdown ul.open-menu{
+    display: block;
+    opacity: 1;
+}
+
+form.sign-up .dropdown ul li {
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.753) inset;
+    /* border: var(--border) solid 1px; */
+    transition: .3s;
+    cursor: pointer;
+
+}
+form.sign-up .dropdown ul li:not(form.sign-up .dropdown ul li:last-of-type){
+    margin-bottom: 8px;
+}
+form.sign-up .dropdown ul li.active {
+    background-color: var(--logo3);
+}
+form.sign-up .dropdown ul li:hover{
+    background-color: var(--bg-secondary);
 }
