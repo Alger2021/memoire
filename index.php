@@ -71,7 +71,7 @@ if(!isset($_SESSION["matricule"])){
                         </div>
 
                         <div class="matriculedata">
-                            <input type="text" name ="email" id="email" placeholder="Email">
+                            <input type="email" name ="email" id="email" placeholder="Email">
                             <label for="matricule">Email:</label>
                         </div>
                         <div class="matriculedata">

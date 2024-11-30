@@ -9,6 +9,6 @@ else{
     $_SESSION["matricule"] = null;
     header("location:../login.php");
 }
-session_unset();
-session_destroy();
+// session_unset();
+// session_destroy();
 ?>

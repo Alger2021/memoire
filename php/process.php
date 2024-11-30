@@ -55,6 +55,9 @@ try {
                     echo "Type of Dropdown is empty";
                     die();
                 }
+                if(!ctype_digit($_POST["numerotlfn"])){
+                    die("Try a valid phone number!");
+                }
                 $date = date('Y-m-d');
                 $statu = "inprocess";
                 

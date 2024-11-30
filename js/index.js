@@ -91,6 +91,13 @@ toggler.addEventListener("click",()=>{
         urgent.value = "0";
     }
 })
+// ------------------------------ Default Date Now
+
+let today = new Date();
+let year = today.getFullYear();
+let month = String(today.getMonth() + 1).padStart(2, '0'); // so if the month is 7, it will be 07 not 7
+let day = String(today.getDate()).padStart(2, '0');
+document.getElementById("urgentdate").value = `${year}-${month}-${day}`;
 
 // ------------------------------ Delete Button Modal
 let targetrow;

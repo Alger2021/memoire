@@ -101,3 +101,7 @@ main .chartscontainer .line {
 main .chartscontainer .line .charts{
     flex-grow: 1;
 }
+
+#lineChart{
+    max-width: 100%;
+}

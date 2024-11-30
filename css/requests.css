@@ -229,3 +229,7 @@ main .modal#editRequest #modalclosebtn1{
     background-color: transparent;
     border: solid 1px var(--gray);
 }
+
+#dt-search-0:focus {
+    border: var(--logo3) solid 1px !important;
+}
