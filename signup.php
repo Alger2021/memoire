@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Zed</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="picts/newlogo.svg" type="image/x-icon">
@@ -14,6 +13,7 @@
     <link href="css/all.min.css" rel="stylesheet" />
     <link href="css/global.css" rel="stylesheet" />
     <link href="css/login.css" rel="stylesheet" />
+    <title>signup</title>
 </head>
 <body>
     <i id="moon" class="fa-solid fa-moon"></i>
