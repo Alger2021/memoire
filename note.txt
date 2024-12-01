@@ -1,0 +1,20 @@
+in php empty array() is equal to false
+
+so when i use fetch
+
+i use
+
+if($query)
+
+{}
+
+and when i use fetchAll i use
+
+if(count($query)){}
+
+------------------------
+
+
+
+
+don't forget to close database connections in index.php

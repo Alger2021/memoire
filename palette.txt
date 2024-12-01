@@ -1,0 +1,6 @@
+00 77 FF mediafire
+20 20 20 notion
+19 19 19 notion
+16 15 15 onelove
+#0f748f my site -- primary
+#00c7fc my site -- secondary
