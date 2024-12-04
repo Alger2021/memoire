@@ -18,13 +18,13 @@ try {
     $demand = new Demandes($dbconn);
     $admin = new Admins($dbconn);
     $target = $_POST['target'] ?? '';
-
     switch ($target) {
         case 'login':
             if (isset($_POST['submit'])) {
-                if ($_POST["matricule"] && $_POST["password"]) {
+                if (!empty($_POST['matricule']) && !empty($_POST['password'])) {
                     if(!ctype_digit($_POST["matricule"])){
-                        echo "matricule incorrect";
+                        $_SESSION["Error"] = "matricule incorrect";
+                        header("location:../login.php");
                         die();
                     }
         
@@ -34,29 +34,34 @@ try {
                         if ($_POST["password"] === $result["password"]) {
                             $_SESSION["matricule"] = $result["matricule"];
                             header("location:../index.php");
+                            die();
                         } else {
-                            echo "wrong password";
+                            $_SESSION["Error"] = "wrong password";
                         }
                     }
                     else{
-                        echo "matricule doesn't exist";
+                        $_SESSION["Error"] = "matricule doesn't exist";
                     }
                 } else {
-                    echo "please fill in all the informations";
+                    $_SESSION["Error"] = "please fill in all the informations";
                 }
             } else {
-                echo "Submit Button was not pressed";
+                $_SESSION["Error"] = "Submit Button was not pressed";
             }
+            header("location:../login.php");
             break;
 
         case 'demand':
             if(isset($_POST["submit"]) && isset($_POST["typefichier"])){
                 if(empty(trim($_POST["typefichier"]))){
-                    echo "Type of Dropdown is empty";
+                    $_SESSION["Error"] = "Type of Dropdown is empty";
+                    header("location:../index.php");
                     die();
                 }
                 if(!empty($_POST["numerotlfn"]) && !ctype_digit($_POST["numerotlfn"])){
-                    die("Try a valid phone number!");
+                    $_SESSION["Error"] = "Try a valid phone number!";
+                    header("location:../index.php");
+                    die();
                 }
                 $date = date('Y-m-d');
                 $statu = "inprocess";
@@ -66,6 +71,14 @@ try {
                 }
                 else{
                     $p = null;
+                }
+                $check = $demand->demande_data_foreign_key($_SESSION["matricule"]);
+                foreach($check as $key=>$value){
+                    if($value["typefichier"] === $_POST["typefichier"]){
+                        $_SESSION["Error"] = "You already requested this Type!";
+                        header("location:../index.php");
+                        die();
+                    }
                 }
                 $result = $demand->insert_demand($_POST["typefichier"],$date,$_POST["email"],$_POST["numerotlfn"],$_POST["descriptions"],$_POST["urgent"],$p,$statu,$_SESSION["matricule"]);
                 if($result>0){
@@ -86,23 +99,32 @@ try {
             
             if(isset($_POST["submit"]) && isset($fullname) && isset($email) && isset($password) && isset($confirmpassword)){
                 if (empty($fullname) || empty($email) || empty($password) || empty($confirmpassword)) {
-                    die("All fields are required.");
+                    $_SESSION["Error"] = "All fields are required.";
+                    header("location:../adminsgestion.php");
+                    die();
                 }
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    die("Invalid email format.");
+                    $_SESSION["Error"] = "Invalid email format.";
+                    header("location:../adminsgestion.php");
+                    die();
                 }
                 if ($password !== $confirmpassword) {
-                    die("Passwords do not match.");
+                    $_SESSION["Error"] = "Passwords do not match.";
+                    header("location:../adminsgestion.php");
+                    die();
                 }
                 // check if email exists
                 $result = $admin->admin_data($email);
-                if(count($result)>0){
-                    die("Email already Exists!");
+                if($result){
+                    $_SESSION["Error"] = "Email already Exists!";
+                    header("location:../adminsgestion.php");
+                    die();
                 }
                 $result2 = $admin->add_admin($fullname,$email,$password);
                 if($result2 == 0){
-                    echo $result2;
-                    die("something went wrong and the admin wasn't added!");
+                    $_SESSION["Error"] = "something went wrong and the admin wasn't added!";
+                    header("location:../adminsgestion.php");
+                    die();
                 }
                 header("location:../analytics.php");
             }
@@ -111,7 +133,9 @@ try {
             if (isset($_POST['submit'])) {
                 if ($_POST["email"] && $_POST["password"]) {
                     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                        die("Invalid email format.");
+                        $_SESSION["Error"] = "Invalid email format.";
+                        header("location:../admin.php");
+                        die();
                     }
         
                     $result = $admin->admin_data($_POST["email"]);  // check if admin exists, and fetch all the data
@@ -121,14 +145,20 @@ try {
                             $_SESSION["email"] = $result["email"];
                             header("location:../analytics.php");
                         } else {
-                            die("wrong password") ;
+                            $_SESSION["Error"] = "wrong password";
+                            header("location:../admin.php");
+                            die();
                         }
                     }
                     else{
-                        die("Email doesn't exist") ;
+                        $_SESSION["Error"] = "Email doesn't exist";
+                        header("location:../admin.php");
+                        die();
                     }
                 } else {
-                    die("please fill in all the informations");
+                    $_SESSION["Error"] = "please fill in all the informations";
+                    header("location:../admin.php");
+                    die();
                 }
             } else {
                 die("Submit Button was not pressed");
@@ -144,26 +174,37 @@ try {
             
             if(isset($_POST["submit"]) && isset($matricule) && isset($styear) && isset($name) && isset($surname) && isset($password) && isset($confirmpassword)){
                 if (empty($matricule) || empty($name) || empty($surname) || empty($password) || empty($confirmpassword)) {
-                    die("All fields are required.");
+                    $_SESSION["Error"] = "All fields are required.";
+                    header("location:../signup.php");
+                    die();
                 }
                 if (!ctype_digit($matricule)) {
-                    die("Invalid matricule format.");
+                    $_SESSION["Error"] = "Invalid matricule format.";
+                    header("location:../signup.php");
+                    die();
                 }
                 if ($password !== $confirmpassword) {
-                    die("Passwords do not match.");
+                    $_SESSION["Error"] = "Passwords do not match.";
+                    header("location:../signup.php");
+                    die();
                 }
                 if($styear>5 || $styear < 1){
-                    die("Invalid study year.");
+                    $_SESSION["Error"] = "Invalid study year.";
+                    header("location:../signup.php");
+                    die();
                 }
                 // check if matricule exists
                 $result = $user->user_data($matricule);
                 if($result){
-                    die("Matricule already Exists!");
+                    $_SESSION["Error"] = "Matricule already Exists!";
+                    header("location:../signup.php");
+                    die();
                 }
                 $result2 = $user->add_user($matricule,$password,$name,$surname,$styear);
                 if($result2 == 0){
-                    echo $result2;
-                    die("something went wrong and the User wasn't added!");
+                    $_SESSION["Error"] = "something went wrong and the User wasn't added!";
+                    header("location:../signup.php");
+                    die();
                 }
                 header("location:../login.php");
             }

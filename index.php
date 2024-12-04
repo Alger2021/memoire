@@ -56,6 +56,12 @@ if(!isset($_SESSION["matricule"])){
                 <form action="php/process.php" method="post">
                     <input type="hidden" name="target" value="demand">
                     <span class="kite">Demande d'un fichier :</span>
+                    <?php 
+                        if(isset($_SESSION["Error"])){
+                            echo "<span id='error-span'>$_SESSION[Error]</span>";
+                            unset($_SESSION["Error"]); 
+                        }
+                    ?>
                     <div class="data">
                         <input type="hidden" name="typefichier" id="dropdownval">
                         <div class="dropdown">

@@ -447,3 +447,25 @@ main .modal .modal-content .modal-footer #modalclosebtn{
 
 
 /* --------------- END OF Modal CSS ------------------- */
+@media (max-width: 575px) {
+
+    body header .container > a{
+        display: none;
+    }
+    header .container .userCard {
+        width: 100%;
+    }
+    header .container a.logout {
+        margin-left: auto;
+    }
+    main .container .tabs button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container{
+        min-width: fit-content;
+    }
+}

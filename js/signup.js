@@ -6,7 +6,7 @@ let arrow = document.querySelector(".dropdown .arrow");
 let options = document.querySelector(".dropdown ul");
 let option = document.querySelectorAll(".dropdown ul li");
 let hiddenvalue = document.getElementById("dropdownval");
-hiddenvalue.value = option[0].dataset.val;
+hiddenvalue.value = 0;
 console.log(option);
 select.addEventListener("click",()=>{
     select.classList.toggle("open");

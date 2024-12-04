@@ -1,3 +1,11 @@
+main.light{
+    --bg-color: white;
+    --bg-secondary: white;
+    --white:black;
+    --black:black;
+    color: var(--black);
+}
+
 input:focus{
     outline: none;
 }
@@ -13,6 +21,9 @@ main .header{
     color: white;
     margin-bottom: 40px;
 }
+main.light .header{
+    color: black;
+}
 main .header span{
     font-size: 18px;
     user-select: none;
@@ -22,12 +33,19 @@ main .header i{
     cursor: pointer;
     color: var(--logo2);
 }
+main.light .header i{
+
+    color: var(--black);
+}
 
 main .all{
     background-color: var(--bg-secondary);
     border-radius: 12px;
     box-shadow: 1px 1px 1px 0px #101934;
     border: solid 0.6px #343B4F;
+}
+main.light .all{
+    box-shadow: 0px 0px 0px 0px #101934;
 }
 main .all .dt-search input {
 
@@ -53,6 +71,9 @@ main table thead{
     color: white;
     font-size: 15px;
     background-color: var(--bg-secondary);
+}
+main.light table thead{
+    color: var(--logo2);
 }
 main table th[aria-sort]{
     color: var(--logo3);
@@ -82,6 +103,9 @@ main .dt-length, main .dt-search > label{
     font-size: 14px;
     color: white !important;
 }
+main.light .dt-length, main.light .dt-search > label{
+    color: black !important;
+}
 main .dt-search i{
     color: var(--logo3);
 }
@@ -89,12 +113,20 @@ main .dt-info{
     font-size: 14px;
     color: white !important;
 }
+main.light .dt-info {
+    font-size: 14px;
+    color: black !important;
+  }
 main .dt-input{
     margin-left: 10px;
     color: white !important;
     background-color: var(--bg-secondary) !important;
     border: solid 1px #0B1739 !important;
     box-shadow: 1px 1px 1px 0px #101934 ;
+}
+main.light .dt-input{
+    color: black !important;
+    box-shadow: 0px 0px 0px 0px #101934 ;
 }
 main .dt-paging-button{
     border-radius: 8px !important;
@@ -104,6 +136,9 @@ main .dt-paging-button{
 main div.dt-container .dt-paging .dt-paging-button:hover{
     background: var(--bg-color);
     border: none;
+}
+main.light div.dt-container .dt-paging .dt-paging-button:hover:not(main.light div.dt-container .dt-paging .dt-paging-button.disabled){
+    color: var(--logo2) !important;
 }
 main tbody tr td i{
     cursor: pointer;
@@ -159,6 +194,9 @@ main .modal .modal-content .modal-footer #modalclosebtn{
     background-color: transparent;
     border: solid 1px var(--gray);
 }
+main.light .modal .modal-content .modal-footer #modalclosebtn{
+    color: black;
+}
 
 #modal-row-fullname{
     margin-top: 8px;
@@ -200,6 +238,9 @@ main .modal#editRequest .editRow input, main .modal#editRequest .editRow textare
     color: var(--gray);
     cursor: default;
 }
+main.light .modal#editRequest .editRow input, main.light .modal#editRequest .editRow textarea{
+    color: var(--black);
+}
 main .modal#editRequest .editRow textarea{
     border: solid 1px var(--logo2);
     cursor: initial;
@@ -213,6 +254,10 @@ main .modal#editRequest .editRow select{
     background-color: var(--bg-color) !important;
     color: var(--gray);
     border: solid 1px var(--logo2);
+}
+main.light .modal#editRequest .editRow select{
+    background-color: var(--bg-color) !important;
+    color: var(--logo2);
 }
 main .modal#editRequest .editRow select option[value="2"]{
     color: var(--logo1) !important;
@@ -229,7 +274,26 @@ main .modal#editRequest #modalclosebtn1{
     background-color: transparent;
     border: solid 1px var(--gray);
 }
+main.light .modal#editRequest #modalclosebtn1{
+    color: black;
+}
 
 #dt-search-0:focus {
     border: var(--logo3) solid 1px !important;
+}
+
+.fa-sun,
+.fa-moon{
+    display: none;
+    position: absolute;
+    right: 35px;
+    top: 29px;
+    font-size: 18px;
+    color: var(--logo2);
+    cursor: pointer;
+}
+
+.fa-sun.active,
+.fa-moon.active{
+    display: block;
 }

@@ -30,6 +30,12 @@
                         <a href="#"><img src="picts/newlogo.svg" alt="LOGO"></a>
                     </div>
                     <span class="kite">Login to Zed</span>
+                    <?php 
+                        if(isset($_SESSION['Error'])){
+                            echo "<span id='error-span'>$_SESSION[Error]</span>";
+                            unset($_SESSION["Error"]); 
+                        }
+                    ?>
                     <div class="data">
                         <div class="matriculedata">
                             <input type="email" name ="email" id="email" placeholder="Email" required>

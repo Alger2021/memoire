@@ -6,7 +6,6 @@ main{
 body{
     display: flex;
     font-family: "Roboto","Sans-serif";
-
 }
 .side-menu{
     display: flex;
@@ -21,6 +20,12 @@ body{
     box-shadow: 0px 8px 28px #010511;
     border-right: solid 1px #0B1739;
 }
+.side-menu.light{
+    background-color: var(--white);
+    box-shadow: 0px 8px 15px var(--gray);
+    border-right: solid 1px var(--logo1);
+}
+
 .side-menu img,.side-menu svg{
     vertical-align: baseline !important;
 }
@@ -62,6 +67,10 @@ body{
     align-items: center;
     color: white;
 }
+.side-menu.light .header{
+    color: var(--black);
+}
+
 .side-menu .header .logo {
     display: flex;
     align-items: center;
@@ -84,6 +93,9 @@ body{
 .side-menu .header .minimize i{
     color: var(--gray);
 }
+.side-menu.light .header .minimize i{
+    color: var(--black);
+}
 
 .side-menu nav{
     display: flex;
@@ -92,6 +104,9 @@ body{
     margin-top: 60px;
     flex-grow: 1;
     color: var(--gray);
+}
+.side-menu.light nav{
+    color: var(--black);
 }
 
 
@@ -112,9 +127,14 @@ body{
     background-color: var(--bg-secondary);
     /* color: white; */
 }
+.side-menu.light nav .nav-header a:hover{
+    background-color: var(--bg-secondary-light);
+    /* color: white; */
+}
 .side-menu nav .nav-header a.active{
     color: var(--logo3);
 }
+
 .side-menu nav .nav-header a.extend > li i.fa-angle-right{
     position: absolute;
     left: calc(100% - 14px);
@@ -176,6 +196,10 @@ body{
     background-color: var(--bg-secondary);
     border-left: solid 1px var(--logo1);
 }
+.side-menu.light nav .nav-header ul li.active,
+.side-menu.light nav .nav-header ul li:hover{
+    background-color: var(--bg-secondary-light);
+}
 ul.extends{
     padding-top: 10px ;
     padding-bottom: 5px ;
@@ -213,8 +237,14 @@ ul.extends{
     font-size: 14px;
     color: white;
 }
+.side-menu.light nav .nav-footer .admin .coords span:first-child{
+    color: black;
+}
 .side-menu nav .nav-footer .admin .coords span:last-child{
     font-size: 12px;
+}
+.side-menu.light nav .nav-footer .admin .coords span:last-child{
+    color: var(--gray);
 }
 .side-menu nav a.logout i{
     display: none;

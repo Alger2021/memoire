@@ -75,6 +75,11 @@
     --bg-secondary:#0A1330;
     --white:white;
     --border:#343B4F;
+    --charts-bg:#0B1739;
+
+    --bg-color-light: white;
+    --bg-secondary-light:#eee;
+    --black:black;
 }
 
 
@@ -128,3 +133,10 @@ a {
     color: inherit;
 }
 
+#error-span{
+    color: red;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    padding-bottom: 16px;
+}

@@ -1,19 +1,14 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 session_start();
 header("Content-Type: application/json");
-// i have to Uncomment this section after i complete the admin authentificantion process.
-// if(!isset($_SESSION['matricule'])){
-//     $response = array(
-//         "code"=>403,
-//         "message"=>"You don't have rights to delete requests"
-//     );
-//     echo json_encode($response);
-//     die();
-// }
-// else 
 
-// PHP doesn't automatically parse JSON data into $_POST or other superglobals
-// that why am going to use this line to read the raw data from the HTTP request body 
+require "../models.php";
+
+$db = new Database();
+$dbconn = $db->connect();
 
 $jsonData = json_decode(file_get_contents('php://input'), true); 
 
@@ -40,10 +35,7 @@ switch ($jsonData["statu"]) {
         break;
 }
 
-include "../config.php";
-$path = "mysql:host=" . dbhost . ";dbname=" . dbname;
-$conn = new PDO($path, dbuser, dbpass);
-$sql = $conn->prepare("UPDATE demandes SET observation=? , statu=? WHERE id=?");
+$sql = $dbconn->prepare("UPDATE demandes SET observation=? , statu=? WHERE id=?");
 $sql->bindParam(1,$jsonData['observation'],PDO::PARAM_STR);
 $sql->bindParam(2,$statu,PDO::PARAM_STR);
 $sql->bindParam(3,$jsonData['id'],PDO::PARAM_INT);
@@ -56,13 +48,41 @@ if(!$rowCount){
     );
 }
 else{
-    $response = array(
-        "code"=>200,
-        "message"=>"User Updated successfully",
-        "rowsAffected"=>$rowCount
-    );
-}
+    require 'PHPMailer/src/Exception.php';
+    require 'PHPMailer/src/PHPMailer.php';
+    require 'PHPMailer/src/SMTP.php';
 
+    try {
+        $mail = new PHPMailer(true);
+
+        $mail->isSMTP();
+        $mail->Host= 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ryadgouffi@gmail.com';
+        $mail->Password= 'wdwf rsjb zxqq verj ';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port= 587;
+
+        $mail->setFrom('ryadgouffi@gmail.com');
+        $mail->addAddress($jsonData['mail']);
+        $mail->isHTML(true);
+        $mail->Subject = 'Request Updated!';
+        $mail->Body= '<h2>Your request '. $jsonData['type'] .' is <span style="color:#CB3CFF;">' . $statu . " !</span></h2>";
+
+        $mail->send();
+        $response = array(
+            "code"=>200,
+            "message"=>"User Updated successfully",
+            "rowsAffected"=>$rowCount
+        );
+    } catch (Exception $e) {
+        $response = array(
+            "code"=>400,
+            "message"=>"Email not sent and the request has been updated"
+        );
+    }
+
+}
 
 echo json_encode($response);
 ?>

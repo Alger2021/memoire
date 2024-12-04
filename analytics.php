@@ -19,7 +19,7 @@ if(!isset($_SESSION["email"])){
     <link rel="stylesheet" href="css/sidemenu.css">
     <link rel="stylesheet" href="css/analytics.css">
 </head>
-<body class="d-flex">
+<body class="d-flex"> 
     <?php
             $db = new Database();
             $dbconn = $db->connect();
@@ -91,7 +91,8 @@ if(!isset($_SESSION["email"])){
     <main>
         <div class="header">
             <span>Analytics</span>
-            <i class="fa-solid fa-sun"></i>
+            <i id="moon" class="fa-solid fa-moon"></i>
+            <i id="sun" class="fa-solid fa-sun active"></i>
         </div>
         <div class="stats">
             <div class="card total">

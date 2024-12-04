@@ -30,6 +30,14 @@ class Admins {
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function delete_admin($email) {
+        $sql = $this->conn->prepare("DELETE FROM {$this->table} WHERE email=?");
+        $sql->bindParam(1, $email, PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->rowCount();
+    }
+
 }
 
 ?>

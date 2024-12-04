@@ -38,6 +38,17 @@ a:focus {
     border: solid 1px var(--logo3);
     border-radius: 4px;
 }
+@media (max-width: 575px) {
+    .containerform{
+        max-width: 100%;
+    }
+
+}
+
+@media (min-width: 576px) {
+
+}
+
 .containerform.light{
     box-shadow: 0px 0px 3px 0px #00c7fc;
     background-color: white;
@@ -266,6 +277,11 @@ form.sign-up .dropdown .select{
     cursor: pointer;
     transition: .3s;
 }
+.containerform.light form.sign-up .dropdown .select{
+    border: solid 1px var(--onelove);
+    color: rgba(0, 0, 0, 0.582);
+}
+
 form.sign-up .dropdown .select.open{
     box-shadow: 0px 0px 4px 0px var(--logo2);
 }
@@ -278,6 +294,11 @@ form.sign-up .dropdown .select .arrow {
     border-right: solid 5px transparent;
     transition: .3s;
 }
+
+.containerform.light form.sign-up .dropdown .select .arrow {
+    border-top: solid 6px var(--black);
+}
+
 form.sign-up .dropdown .select .arrow.rotate{
     transform: rotate(180deg);
 }
@@ -298,6 +319,11 @@ form.sign-up .dropdown ul{
     /* border: 1px solid var(--border); */
     box-shadow: 0px 0px 4px 1px black;
 }
+.containerform.light form.sign-up .dropdown ul{
+    background-color: var(--bg-color-light);
+    color: black;
+}
+
 form.sign-up .dropdown ul.open-menu{
     display: block;
     opacity: 1;
@@ -320,4 +346,7 @@ form.sign-up .dropdown ul li.active {
 }
 form.sign-up .dropdown ul li:hover{
     background-color: var(--bg-secondary);
+}
+.containerform.light form.sign-up .dropdown ul li:hover{
+    background-color: var(--logo2);
 }

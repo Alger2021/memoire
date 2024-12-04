@@ -2,6 +2,12 @@
 session_start();
 header("Content-Type: application/json");
 
+require "../models.php";
+
+$db = new Database();
+$dbconn = $db->connect();
+
+
 if(!isset($_GET['request_id'])){
     $response = array(
         "code"=>400,
@@ -10,14 +16,12 @@ if(!isset($_GET['request_id'])){
     echo json_encode($response);
     die();
 }
-include "../config.php";
-$path = "mysql:host=" . dbhost . ";dbname=" . dbname;
-$conn = new PDO($path, dbuser, dbpass);
+
 if(isset($_SESSION['email'])){
-    $sql = $conn->prepare("DELETE FROM demandes WHERE id= ?");
+    $sql = $dbconn->prepare("DELETE FROM demandes WHERE id= ?");
 }
 else{
-    $sql = $conn->prepare("DELETE FROM demandes WHERE id= ? and  foreign_key = ?");
+    $sql = $dbconn->prepare("DELETE FROM demandes WHERE id= ? and  foreign_key = ?");
     $sql->bindParam(2,$_SESSION["matricule"],PDO::PARAM_INT);
 }
 $sql->bindParam(1,$_GET['request_id'],PDO::PARAM_INT);

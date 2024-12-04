@@ -14,6 +14,7 @@ require 'php/admins.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="shortcut icon" href="picts/newlogo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="libs/bootstrapv5/bootstrap.min.css">
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/all.min.css" rel="stylesheet" />
     <link href="css/global.css" rel="stylesheet" />
@@ -81,9 +82,11 @@ require 'php/admins.php';
     </div>
 
     <main>
+
         <div class="header">
             <span>Requests</span>
-            <i class="fa-solid fa-sun"></i>
+            <i id="moon" class="fa-solid fa-moon"></i>
+            <i id="sun" class="fa-solid fa-sun active"></i>
         </div>
         <div class="parent">
             <div class="management">
@@ -97,6 +100,12 @@ require 'php/admins.php';
                 <div class="page page1 active" id="page1">
                     <span><i class="fa-solid fa-plus"></i>Add a new admin</span>
                     <form action="php/process.php" method="post">
+                        <?php 
+                            if(isset($_SESSION['Error'])){
+                                echo "<span id='error-span'>$_SESSION[Error]</span>";
+                                unset($_SESSION["Error"]); 
+                            }
+                        ?>
                         <input type="hidden" name="target" value="addAdmin">
                         <div class="fullname">
                             <div class="field">
@@ -144,14 +153,33 @@ require 'php/admins.php';
                                 echo '<div class="admin"><div class="info"><img src="picts/user.png" alt=""><div class="coords">';
                                 echo "<span class=\"admin-name\">$value[fullname]</span>";
                                 echo "<p class=\"admin-email\">$value[email]</p>";
-                                echo "</div></div><i class=\"fa-solid fa-trash-can\"></i></div>";
+                                echo "</div></div><i data-bs-toggle=\"modal\" data-bs-target=\"#deleteRequest\" class=\"fa-solid fa-trash-can\"></i></div>";
                             }
                         ?>
                     </div>
                 </div>
             </div>
         </div>
+            <!-- Delete Request Modal -->
+    <div class="modal fade" id="deleteRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header text-danger">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-trash"></i>Delete Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    Are you sure you want to delete Admin!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modalclosebtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="modaldeletebtn"  class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
+    <script src="libs/bootstrapv5/bootstrap.bundle.min.js"></script>
     <script src="js/sidemenu.js"></script>
     <script src="js/admingestion.js"></script>
 </body>

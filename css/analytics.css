@@ -1,11 +1,17 @@
 main{
     padding: 28px 35px;
 }
+main.light{
+    background-color: var(--bg-color-light);
+}
 main .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
+}
+main.light .header{
+    color: var(--black);
 }
 main .header span{
     font-size: 18px;
@@ -16,6 +22,9 @@ main .header i{
     cursor: pointer;
     color: var(--logo2);
 }
+main.light .header i{
+    color:var(--black);
+}
 
 main .stats{
     display: flex;
@@ -24,12 +33,15 @@ main .stats{
 }
 
 main .card {
-    background-color: #0B1739;
+    background-color: var(--charts-bg);
     border-radius: 8px;
     padding: 18px;
     margin-right: 20px;
     width: 250px;
     margin-bottom: 20px;
+}
+main.light .card {
+    background-color: var(--bg-secondary-light);
 }
 main .card:last-child{
     margin-right: 0px;
@@ -52,20 +64,34 @@ main .card-header .title i {
 }
 main .card-header > i {
     cursor: pointer;
-    color: white;
+    color: var(--white);
+}
+main.light .card-header > i {
+    cursor: pointer;
+    color: var(--black);
 }
 main .card-header .title span {
-    color: #AEB9E1;
+    color: white;
+    font-size: 14px;
+}
+main.light .card-header .title span {
+    color: black;
     font-size: 14px;
 }
 main .card > span {
     font-weight: bold;
-    color: white;
+    color: var(--gray);
     font-size: 20px;
+}
+main.light .card > span {
+    color: var(--logo2);
 }
 main .card > span span {
     font-size: 13px;
     color: var(--gray);
+}
+main.light .card > span span {
+    color: var(--logo2);
 }
 main .card.pie{
     width: 350px;
@@ -90,6 +116,12 @@ main .chartscontainer .pie .charts .chart-btns button{
     font-size: 14px;
     cursor: pointer;
 }
+main.light .chartscontainer .pie .charts .chart-btns button{
+    background-color: white;
+    color: var(--black);
+    border: solid 1px #fff;
+    box-shadow: 0px 0px 0px 0px var(--bg-color);
+}
 main .chartscontainer .pie .charts .chart-btns button.active{
     color: var(--logo3);
 }
@@ -104,4 +136,20 @@ main .chartscontainer .line .charts{
 
 #lineChart{
     max-width: 100%;
+}
+
+.fa-sun,
+.fa-moon{
+    display: none;
+    position: absolute;
+    right: 35px;
+    top: 29px;
+    font-size: 18px;
+    color: var(--logo2);
+    cursor: pointer;
+}
+
+.fa-sun.active,
+.fa-moon.active{
+    display: block;
 }

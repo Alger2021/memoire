@@ -87,7 +87,8 @@
     <main>
         <div class="header">
             <span>Requests</span>
-            <i class="fa-solid fa-sun"></i>
+            <i id="moon" class="fa-solid fa-moon"></i>
+            <i id="sun" class="fa-solid fa-sun active"></i>
         </div>
         <div class="all">
             <table id="tablerequest">
